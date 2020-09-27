@@ -10,25 +10,29 @@ let guess_count = 0;
 const random_number = Math.floor(Math.random() * 100 + 1);
 console.log(random_number);
 document.querySelector("#check_it").addEventListener("click", checkNumber);
-
+document.querySelector("#nr_game").addEventListener("keyup", function (event) {
+    if (event.keyCode === 13)
+        checkNumber()
+});
 function checkNumber() {
-  guess_count++;
-  // Input elementine tekrar tekrar daha rahat erişim sağlamak için
-  let userInputElement = document.querySelector("#nr_game");
-  let answerLabelElement = document.querySelector("#answer");
-  document.querySelector(
-    "#count_it"
-  ).innerText = `Guess count is: ${guess_count}`;
-
-  if (userInputElement.value == random_number) {
-    alert("You are the winner!");
-  } else if (userInputElement.value == "") {
-    answerLabelElement.innerText = "Enter a Number!";
-  } else if (userInputElement.value > random_number) {
-    answerLabelElement.innerText = "Try a smaller number!";
-  } else if (userInputElement.value < random_number) {
-    answerLabelElement.innerText = "Try a higher number!";
-  } else if (isNaN(userInputElement.value)) {
-    answerLabelElement.innerText = "It's not a number!";
-  }  
+    // Input elementine tekrar tekrar daha rahat erişim sağlamak için
+    let userInputElement = document.querySelector("#nr_game");
+    let answerLabelElement = document.querySelector("#answer");
+    if (userInputElement.value == random_number) {
+        alert("You are the winner!");
+    } else if (userInputElement.value == "") {
+        answerLabelElement.innerText = "Enter a number!";
+    } else if (userInputElement.value > random_number) {
+        guess_count++;
+        document.querySelector("#count_it").innerText = `Guess count is: ${guess_count}`;
+        answerLabelElement.innerText = "Try a smaller number!";
+    } else if (userInputElement.value < random_number) {
+        guess_count++;
+        document.querySelector("#count_it").innerText = `Guess count is: ${guess_count}`;
+        answerLabelElement.innerText = "Try a higher number!";
+    } else if (isNaN(userInputElement.value)) {
+        answerLabelElement.innerText = "It's not a number!";
+    }
+    userInputElement.focus();
+    userInputElement.value = "";
 }
