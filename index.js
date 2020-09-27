@@ -22,13 +22,13 @@ function checkNumber() {
 
   if (userInputElement.value == random_number) {
     alert("You are the winner!");
+  } else if (userInputElement.value == "") {
+    answerLabelElement.innerText = "Enter a Number!";
   } else if (userInputElement.value > random_number) {
     answerLabelElement.innerText = "Try a smaller number!";
   } else if (userInputElement.value < random_number) {
     answerLabelElement.innerText = "Try a higher number!";
   } else if (isNaN(userInputElement.value)) {
     answerLabelElement.innerText = "It's not a number!";
-  }  else if (userInputElement.value == "") {
-    answerLabelElement.innerText = "Enter a Number";
-  }
+  }  
 }
